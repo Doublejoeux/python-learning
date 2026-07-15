@@ -1,7 +1,7 @@
 #TO_DO LIST
 tasks = []
 def add_task():
-    task = tasks.append(input("Enter a task: "))
+    tasks.append(input("Enter a task: "))
 
 def view_tasks():
     if len(tasks) == 0:
@@ -31,6 +31,7 @@ def mark_task():
     else:    
         check = (input("Number of the task to be marked: "))
         if check.isdigit():
+            choice = int(check)
             if choice > len(tasks) or choice < 1:
                 print("Invalid")
             else:
