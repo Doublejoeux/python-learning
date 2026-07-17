@@ -125,7 +125,7 @@ def running():
     elif start == "history":
         for i in history:
             print(i)
-            return True
+        return True
     else:
         print("End!")
         return False
