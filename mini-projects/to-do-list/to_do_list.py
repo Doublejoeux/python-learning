@@ -1,7 +1,22 @@
 #TO_DO LIST
-tasks = []
+import json
+def load_tasks():
+    try:
+        with open("tasks.json", "r") as file:
+            data = json.load(file)
+            return data
+    except FileNotFoundError:
+        return []
+
+tasks = load_tasks()
+
+def save_tasks():
+    with open("tasks.json", "w") as file:
+        json.dump(tasks, file)
+
 def add_task():
     tasks.append(input("Enter a task: "))
+    save_tasks()
 
 def view_tasks():
     if len(tasks) == 0:
@@ -14,6 +29,7 @@ def remove_task():
     if len(tasks) == 0:
         print("No tasks available")
     else:
+        view_tasks()
         check = input("Number of the task to be removed: ")
         if check.isdigit():
             choice = int(check)
@@ -22,13 +38,16 @@ def remove_task():
             else:
                 removed = tasks.pop(choice - 1)
                 print(f"you removed {removed}")
+                view_tasks()
+                save_tasks()
         else:
             print("Invalid")
 
 def mark_task():
     if len(tasks) == 0:
         print("No tasks available")
-    else:    
+    else:
+        view_tasks()    
         check = (input("Number of the task to be marked: "))
         if check.isdigit():
             choice = int(check)
@@ -37,6 +56,9 @@ def mark_task():
             else:
                 mark = int(choice - 1)
                 tasks[mark] = f"{tasks[mark]} [x]"
+                print("Done!")
+                view_tasks()
+                save_tasks()
         else:
             print("Invalid")        
 
@@ -73,5 +95,4 @@ def begin():
             begin = True
         else:
             begin = False
-             
-begin()    
+begin()
