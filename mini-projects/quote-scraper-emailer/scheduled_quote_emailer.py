@@ -109,7 +109,7 @@ def begin():
     
     send_email(msg, gmail_address, gmail_app_password)
 
-schedule.every(5).day.at("09:00").do(begin)
+schedule.every().day.at("09:00").do(begin)
 while True:
     schedule.run_pending()
     time.sleep(1)
